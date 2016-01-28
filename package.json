@@ -1,0 +1,16 @@
+{
+  "name"         : "minder",
+  "version"      : "0.0.1",
+  "description"  : "Map-based friend finder",
+  "main"         : "server.js",
+  "author"       : "ultor",
+  "dependencies" : {
+    "express"    : "latest",
+    "angular2"    : "latest",
+    "mongoose"   : "latest",
+    "morgan"	 : "latest",
+    "express-jwt": "latest",
+    "jsonwebtoken": "latest",
+    "body-parser": "latest"
+    }
+}
