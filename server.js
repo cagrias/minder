@@ -30,7 +30,9 @@ var loginRouter = require('./router/loginRouter.js');
 //app.use('/rs/twitter', tweetRouter);
 app.use('/rs/login', loginRouter);
 
-app.listen(8000);
+app.listen(8000,function(){
+    console.log("Server listening on port 8000");
+});
 
 process.on('uncaughtException', function(err) {
 	console.log(err);
