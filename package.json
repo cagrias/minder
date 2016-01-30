@@ -6,7 +6,6 @@
   "author"       : "ultor",
   "dependencies" : {
     "express"    : "latest",
-    "angular2"    : "latest",
     "mongoose"   : "latest",
     "morgan"	 : "latest",
     "express-jwt": "latest",
