@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://zuzu:test@ds039211.mongolab.com:39211/zuzu_crew_test_db');
 
 //app.use(express.static(__dirname + '/public'));	// set the static files location /public/img will be /img for users
-app.use(express.static(__dirname));
+app.use(express.static(__dirname + '/client' ));
 
 // configure body parser
 // parse application/x-www-form-urlencoded
@@ -25,9 +25,9 @@ app.use(function(req, res, next) {
 // set default engine to jade for rendering (?)
 //app.set('view engine', 'jade');
 	
-var tweetRouter = require('./router/tweetRouter.js');
+//var tweetRouter = require('./router/tweetRouter.js');
 var loginRouter = require('./router/loginRouter.js');
-app.use('/rs/twitter', tweetRouter);
+//app.use('/rs/twitter', tweetRouter);
 app.use('/rs/login', loginRouter);
 
 app.listen(8000);

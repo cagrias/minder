@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Minder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" type="image/png" href="img/favi.png">
+  <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+  <!--BOOTSTRAP & JQUERY-->
+  <link href="style.css" rel="stylesheet">
+
+  <!--JASNY OFFMENU-->
+  <link href="libs/jasny/jasny-bootstrap.min.css" rel="stylesheet">
+  <script type="text/javascript" src="libs/jasny/jasny-bootstrap.min.js"></script>
+  <!--ANGULAR-->
+  <script src="node_modules/typescript/lib/typescript.js"></script>
+  <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+  <script src="node_modules/systemjs/dist/system.src.js"></script>
+  <script src="config.js"></script>
+  <script src="node_modules/rxjs/bundles/Rx.js"></script>
+  <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+  <script src="node_modules/angular2/bundles/router.dev.js"></script>
+  <!--SOCKET-->
+  <script src="/socket.io/socket.io.js"></script>
+  <!--SWEETALERT-->
+  <script src="libs/sweetalert/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="libs/sweetalert/sweetalert.css">
+  <script src="libs/bootbox/bootbox.min.js"></script>
+  <!--ANGULAR ROUTING for router paths-->
+  <base href="/">
+</head>
+<body>
+
+
+
+<RootComponent></RootComponent>
+
+<script>
+  System.import('RootComponent')
+          .then(null, console.error.bind(console));
+</script>
+
+</body>
+
+</html>
