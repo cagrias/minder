@@ -243,7 +243,7 @@ input, textarea, select, label {
           pass=$("#password").val();
         $.ajax({
           method: 'POST',
-          url: '/authenticate',
+          url: '/rs/login/authenticate',
           data: {'username': user,
                'password': pass},
           cache: false,
@@ -253,7 +253,10 @@ input, textarea, select, label {
           success: function(data, textStatus, jqXHR) {},
           complete: function(xhr, textStatus) {}
         }).done(function(res) {
-          if(res=="yes"){
+            
+            console.log(res);
+            
+          if(res.type){
             alert('Nice!','You\'ve successfully logged in','success');
             window.location.replace('/topology');
           }else{
