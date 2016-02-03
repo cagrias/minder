@@ -96,6 +96,7 @@ module.exports = (function() {
 			}
 		});
 	});
+
 	
 	
 	loginRouter.get('/me', expjwt({secret: JWT_SECRET}), function(req, res) {

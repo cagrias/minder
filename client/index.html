@@ -11,7 +11,8 @@
   <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   <link rel="icon" type="image/png" href="img/favi.png">
   <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
-
+  <script type="text/javascript" src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="node_modules/sweetalert/dist/sweetalert.css">
   <script src="node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.min.js"></script>
 
 
@@ -253,21 +254,21 @@ input, textarea, select, label {
           success: function(data, textStatus, jqXHR) {},
           complete: function(xhr, textStatus) {}
         }).done(function(res) {
-            
+            console.log('yehh');
             console.log(res);
             
           if(res.type){
-            alert('Nice!','You\'ve successfully logged in','success');
-            window.location.replace('/topology');
+            swal('Nice!','You\'ve successfully logged in','success');
+            window.location.replace('/rs/home/main');
           }else{
-            alert("Wrong Credentials");
+            swal("Wrong credentials!", "Did you sign up?","error");
           }
           })
           .fail(function(xhr, textStatus, errorThrown) {
-            console.log("1)"+JSON.stringify(xhr) );
+          console.log("1)"+JSON.stringify(xhr) );
           console.log("2)"+textStatus);
           console.log("3)"+errorThrown);
-          alert('Wrong credentialss');
+          swal("Oops...", "Something went wrong!", "error");
           })
           .always(function() {
             console.log("complete");
@@ -289,7 +290,7 @@ input, textarea, select, label {
     <input type="submit" value="Login" class="login-submit">
     <p class="login-help"><a href="index.html">Forgot password?</a></p>
   </form>
-<!--
+
   <section class="about">
     <p class="about-links">
       <a href="http://www.cssflow.com/snippets/facebook-login-form" target="_parent">View Article</a>
@@ -300,6 +301,6 @@ input, textarea, select, label {
       <a href="http://www.cssflow.com/mit-license" target="_blank">MIT License</a><br>
       Original PSD by <a href="http://dribbble.com/shots/808325-Facebook-Login-Freebie" target="_blank">Alex Montague</a>
     </p>
-  </section>-->
+  </section>
 </body>
 </html>

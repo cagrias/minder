@@ -25,10 +25,10 @@ app.use(function(req, res, next) {
 // set default engine to jade for rendering (?)
 //app.set('view engine', 'jade');
 	
-//var tweetRouter = require('./router/tweetRouter.js');
 var loginRouter = require('./router/loginRouter.js');
-//app.use('/rs/twitter', tweetRouter);
+var homeRouter = require('./router/homeRouter.js');
 app.use('/rs/login', loginRouter);
+app.use('/rs/home', homeRouter);
 
 app.listen(8000,function(){
     console.log("Server listening on port 8000");

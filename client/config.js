@@ -8,6 +8,6 @@ System.config({
     //map tells the System loader where to look for things
     defaultJSExtensions: true,
     map: {
-        RootComponent: "./components/RootComponent"
+        RootComponent: "/./components/RootComponent"
     }
 });

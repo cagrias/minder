@@ -8,11 +8,11 @@ import {Test} from "./Test";
     selector: 'RootComponent'
 })
 @View({
-    templateUrl: 'navigation/topnav.html',
+    templateUrl: '/./navigation/topnav.html',
     directives: [ROUTER_DIRECTIVES]
 })
 @RouteConfig([
-    {path: '/test', component: Test, name: 'Test', useAsDefault: true},
+    {path: '/rs/home/test', component: Test, name: 'Test', useAsDefault: true},
     {path: '/...', name: 'T', redirectTo: ['Test']}
 ])
 export class RootComponent implements OnInit {
