@@ -5,7 +5,7 @@ var fs = require('fs');
 var mongoose = require('mongoose');
 
 // connect to db
-mongoose.connect('mongodb://zuzu:test@ds039211.mongolab.com:39211/zuzu_crew_test_db');
+mongoose.connect('mongodb://minder:minder@192.168.3.25:27017/minder');
 
 //app.use(express.static(__dirname + '/public'));	// set the static files location /public/img will be /img for users
 app.use(express.static(__dirname + '/client' ));

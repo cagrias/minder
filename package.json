@@ -10,6 +10,7 @@
     "morgan"	 : "latest",
     "express-jwt": "latest",
     "jsonwebtoken": "latest",
-    "body-parser": "latest"
+    "body-parser": "latest",
+    "nodemailer": "latest"
     }
 }

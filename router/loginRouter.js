@@ -2,6 +2,7 @@ var express = require('express');
 var expjwt = require('express-jwt');
 var jwt		= require('jsonwebtoken');
 var Account = require('../model/account.js');
+var nodemailer = require('nodemailer');
 
 var JWT_SECRET = "secret";
 
@@ -10,13 +11,8 @@ module.exports = (function() {
 	var loginRouter = express.Router();
 	
 	// middleware to use for all requests
-	loginRouter.use('/', function(req, res, next) {
-		console.log('Entered LoginRouter Service with url: ' + req.url);
-		next();
-	});
-
 	loginRouter.get('/', function(req, res) {
-        console.log('Bu da ikinci: ' + req.url);
+        console.log('Entered LoginRouter Service with url: ' + req.url);
 		res.json({
 					data: "Sign-in or Sign-up!"
 				});
@@ -32,7 +28,6 @@ module.exports = (function() {
 
 	loginRouter.post('/authenticate', function(req, res) {
 		console.log("Auth post!");
-		console.log(req.body);
 		Account.findOne({'username': req.body.username, 'password': req.body.password}, function(err, account) {
 			if (err) {
 				res.json({
@@ -61,10 +56,7 @@ module.exports = (function() {
 	});
 	
 	loginRouter.post('/signup', function(req, res) {
-		console.log("Sign-up post!");
-        console.log(req);
-        console.log(req.body);
-        console.log(req.body.username + " " + req.body.password);
+		console.log("Sign-up post with username:" + req.body.username + ", pass:" + req.body.password);
 		Account.findOne({username: req.body.username, password: req.body.password}, function(err, account) {
 			if (err) {
 				res.json({
@@ -81,16 +73,14 @@ module.exports = (function() {
 					var accModel = new Account();
 					accModel.username = req.body.username;
 					accModel.password = req.body.password;
+                    accModel.token    = jwt.sign({"username": req.body.username, "password": req.body.password}, JWT_SECRET);
 					accModel.save(function(err, account) {
-						account.token = jwt.sign(account, JWT_SECRET);
 						console.log(account.token);
-						account.save(function(err, account1) {
-							res.json({
-								type: true,
-								data: account1,
-								token: account1.token
-							});
-						});
+						res.json({
+                            type: true,
+                            data: account
+                            // token: account.token
+                        });
 					})
 				}
 			}
@@ -100,8 +90,7 @@ module.exports = (function() {
 	
 	
 	loginRouter.get('/me', expjwt({secret: JWT_SECRET}), function(req, res) {
-		console.log("Me get!");
-		console.log("Me user: " + req.user.username+" "+req.user.password+" "+req.user.token+" "+req.token);
+		console.log("Me user: " + req.user.username+" "+req.user.password);
 		Account.findOne({username: req.user.username, password: req.user.password}, function(err, account) {
 			if (err) {
 				res.json({
