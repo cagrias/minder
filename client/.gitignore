@@ -2,3 +2,5 @@
 node_modules
 components/*.js
 components/*.js.map
+root/*.js.map
+root/*.js
