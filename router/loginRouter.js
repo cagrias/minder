@@ -100,6 +100,7 @@ module.exports = (function() {
 				if (account) {
 					console.log("Activating user...");
                     account.isActive = true;
+                    account.save();
 					res.json({
 						type: true,
 						data: account
@@ -117,11 +118,11 @@ module.exports = (function() {
 	});
 
     function sendEmail(username, token) {
-        var transporter = nodemailer.createTransport('smtps://aslanbascagri%40gmail.com:***@smtp.gmail.com');
-        var activateUrl = "https://192.168.3.71:8000/front/activate?username="+ username+ "&token=" + token;
+        var transporter = nodemailer.createTransport('smtps://ultor.band%40gmail.com:ultortheband@smtp.gmail.com');
+        var activateUrl = "http://192.168.3.71:8000/#/front/activate/"+ username+ "/" + token;
         // setup e-mail data with unicode symbols
         var mailOptions = {
-            from: 'Ultor™ <aslanbascagri@gmail.com>', // sender address
+            from: 'Ultor™ <ultor.band@gmail.com>', // sender address
             to: username, // list of receivers
             subject: 'Activate your account ✔', // Subject line
             text: 'Activate URL: ' + activateUrl, // plaintext body
