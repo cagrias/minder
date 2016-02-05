@@ -40,8 +40,8 @@ module.exports = (function() {
 					console.log(account.token);
 					res.json({
 						type: true,
-						data: account,
-						token: account.token
+						data: account
+						// token: account.token
 					}); 
 					console.log("OK!");
 				} else {
@@ -69,7 +69,14 @@ module.exports = (function() {
 						type: false,
 						data: "User already exists!"
 					});
-				} else {
+				} else if(!req.body.username || !req.body.username) {
+                    res.json({
+						type: false,
+						data: "Void info!"
+					});
+                }
+                else {          
+                    sendEmail(req.body.username);         
 					var accModel = new Account();
 					accModel.username = req.body.username;
 					accModel.password = req.body.password;
@@ -87,6 +94,25 @@ module.exports = (function() {
 		});
 	});
 
+    function sendEmail(username) {
+        var transporter = nodemailer.createTransport('smtps://aslanbascagri%40gmail.com:34levrek@smtp.gmail.com');
+        // setup e-mail data with unicode symbols
+        var mailOptions = {
+            from: 'Ultor™ <aslanbascagri@gmail.com>', // sender address
+            to: username, // list of receivers
+            subject: 'Sign Up successful ✔', // Subject line
+            text: 'Hello from the other side', // plaintext body
+            html: '<b>Hello world 🐴</b>' // html body
+        };
+        
+        // send mail with defined transport object
+        transporter.sendMail(mailOptions, function(error, info){
+            if(error){
+                return console.log(error);
+            }
+            console.log('Message sent: ' + info.response);
+        });
+    }
 	
 	
 	loginRouter.get('/me', expjwt({secret: JWT_SECRET}), function(req, res) {
@@ -105,6 +131,7 @@ module.exports = (function() {
 			}
 		});
 	});
+    
 	
 	return loginRouter;
 })();
