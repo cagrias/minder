@@ -18,14 +18,6 @@ module.exports = (function() {
 				});
 	});
 
-	
-	loginRouter.get('/authenticate', function(req, res) {
-		console.log("Auth get!");
-		res.json({
-					data: "Auth get!"
-				});
-	});
-
 	loginRouter.post('/authenticate', function(req, res) {
 		console.log("Auth post!");
 		Account.findOne({'username': req.body.username, 'password': req.body.password}, function(err, account) {
@@ -75,12 +67,13 @@ module.exports = (function() {
 						data: "Void info!"
 					});
                 }
-                else {          
-                    sendEmail(req.body.username);         
+                else {                 
 					var accModel = new Account();
 					accModel.username = req.body.username;
 					accModel.password = req.body.password;
+                    accModel.isActive = false;
                     accModel.token    = jwt.sign({"username": req.body.username, "password": req.body.password}, JWT_SECRET);
+                    sendEmail(req.body.username, accModel.token);  
 					accModel.save(function(err, account) {
 						console.log(account.token);
 						res.json({
@@ -93,16 +86,46 @@ module.exports = (function() {
 			}
 		});
 	});
+    
+	loginRouter.post('/activate', function(req, res) {
+		console.log("Activate get!");
+		Account.findOne({'username': req.body.username, 'token': req.body.token}, function(err, account) {
+			if (err) {
+				res.json({
+					type: false,
+					data: "Error occured: " + err
+				});
+				console.log("Error");
+			} else {
+				if (account) {
+					console.log("Activating user...");
+                    account.isActive = true;
+					res.json({
+						type: true,
+						data: account
+					}); 
+					console.log("User is activated!");
+				} else {
+					res.json({
+						type: false,
+						data: "User does not exist!"
+					});    
+					console.log("User does not exist!");
+				}
+			}
+		});
+	});
 
-    function sendEmail(username) {
-        var transporter = nodemailer.createTransport('smtps://aslanbascagri%40gmail.com:34levrek@smtp.gmail.com');
+    function sendEmail(username, token) {
+        var transporter = nodemailer.createTransport('smtps://aslanbascagri%40gmail.com:***@smtp.gmail.com');
+        var activateUrl = "https://192.168.3.71:8000/front/activate?username="+ username+ "&token=" + token;
         // setup e-mail data with unicode symbols
         var mailOptions = {
             from: 'Ultor™ <aslanbascagri@gmail.com>', // sender address
             to: username, // list of receivers
-            subject: 'Sign Up successful ✔', // Subject line
-            text: 'Hello from the other side', // plaintext body
-            html: '<b>Hello world 🐴</b>' // html body
+            subject: 'Activate your account ✔', // Subject line
+            text: 'Activate URL: ' + activateUrl, // plaintext body
+            html: '<b>Hello world 🐴. <a href="' + activateUrl + '" > Click here for activation </a></b>' // html body
         };
         
         // send mail with defined transport object
