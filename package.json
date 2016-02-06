@@ -11,6 +11,9 @@
     "express-jwt": "latest",
     "jsonwebtoken": "latest",
     "body-parser": "latest",
-    "nodemailer": "latest"
+    "nodemailer": "latest",
+    "passport": "latest",
+    "passport-local": "latest",
+    "passport-facebook": "latest"
     }
 }
