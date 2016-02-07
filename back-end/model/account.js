@@ -2,20 +2,14 @@ var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
  
 var AccountSchema   = new Schema({
-    local            : {
-        username        : String,
-        password     : String,
-        token        : String
-    },
-    
-    facebook         : {
-        id           : String,
-        token        : String,
-        email        : String,
-        name         : String
-    },
-    
-    isActive: Boolean
+    username     : String,  // email
+    password     : String,
+    token        : String,
+    facebook_id  : String,
+    name         : String,
+    isActive     : Boolean,
+    gender       : String,
+    userType     : String    // facebook or local
 
 });
  

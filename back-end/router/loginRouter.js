@@ -20,7 +20,7 @@ module.exports = function(passport) {
 
 	loginRouter.post('/authenticate', function(req, res) {
 		console.log("Auth post!");
-		Account.findOne({'local.username': req.body.username, 'password': req.body.password}, function(err, account) {
+		Account.findOne({'username': req.body.username, 'password': req.body.password}, function(err, account) {
 			if (err) {
 				res.json({
 					type: false,
@@ -29,10 +29,10 @@ module.exports = function(passport) {
 				console.log("Error");
 			} else {
 				if (account) {
-					console.log(account.local.token);
+					console.log(account.token);
 					res.json({
 						type: true,
-						data: account.local
+						data: account
 						// token: account.token
 					}); 
 					console.log("OK!");
@@ -49,7 +49,7 @@ module.exports = function(passport) {
 	
 	loginRouter.post('/signup', function(req, res) {
 		console.log("Sign-up post with username:" + req.body.username + ", pass:" + req.body.password);
-		Account.findOne({'local.username': req.body.username, 'local.password': req.body.password}, function(err, account) {
+		Account.findOne({'username': req.body.username, 'password': req.body.password}, function(err, account) {
 			if (err) {
 				res.json({
 					type: false,
@@ -69,16 +69,19 @@ module.exports = function(passport) {
                 }
                 else {                 
 					var accModel = new Account();
-					accModel.local.username = req.body.username;
-					accModel.local.password = req.body.password;
+					accModel.username = req.body.username;
+					accModel.password = req.body.password;
+                    accModel.name     = req.body.name;
+                    accModel.gender   = req.body.gender;
+                    accModel.userType = "local";
                     accModel.isActive = false;
-                    accModel.local.token    = jwt.sign({"username": req.body.username, "password": req.body.password}, JWT_SECRET);
-                    sendEmail(req.body.username, accModel.local.token);  
+                    accModel.token    = jwt.sign({"username": req.body.username, "password": req.body.password}, JWT_SECRET);
+                    sendEmail(req.body.username, accModel.token);  
 					accModel.save(function(err, account) {
-						console.log(account.local.token);
+						console.log(account.token);
 						res.json({
                             type: true,
-                            data: account.local
+                            data: account
                             // token: account.token
                         });
 					})
@@ -88,8 +91,8 @@ module.exports = function(passport) {
 	});
     
 	loginRouter.post('/activate', function(req, res) {
-		console.log("Activate get!");
-		Account.findOne({'local.username': req.body.username, 'local.token': req.body.token}, function(err, account) {
+		console.log("Activate post!");
+		Account.findOne({'username': req.body.username, 'token': req.body.token}, function(err, account) {
 			if (err) {
 				res.json({
 					type: false,
@@ -103,7 +106,7 @@ module.exports = function(passport) {
                     account.save();
 					res.json({
 						type: true,
-						data: account.local
+						data: account
 					}); 
 					console.log("User is activated!");
 				} else {
@@ -121,15 +124,18 @@ module.exports = function(passport) {
 	// route for facebook authentication and login
 	loginRouter.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 	// handle the callback after facebook has authenticated the user
-	loginRouter.get('/auth/facebook/callback', passport.authenticate('facebook', {
-			successRedirect : '/me',
-			failureRedirect : '/'
-		}));
-	
+	loginRouter.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/rs/login' }),
+        function(req, res) {
+            console.log("User details taken from facebook: " + res.user);
+            res.json(req.user);           
+            // Successful authentication, redirect home.
+            // res.redirect('/rs/login/me');
+    });
+
 	
 	loginRouter.get('/me', expjwt({secret: JWT_SECRET}), function(req, res) {
 		console.log("Me user: " + req.user.username+" "+req.user.password);
-		Account.findOne({'local.username': req.user.username, 'local.password': req.user.password}, function(err, account) {
+		Account.findOne({'username': req.user.username, 'password': req.user.password}, function(err, account) {
 			if (err) {
 				res.json({
 					type: false,
@@ -138,7 +144,7 @@ module.exports = function(passport) {
 			} else {
 				res.json({
 					type: true,
-					data: account.local
+					data: account
 				});
 			}
 		});
