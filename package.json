@@ -14,6 +14,7 @@
     "nodemailer": "latest",
     "passport": "latest",
     "passport-local": "latest",
-    "passport-facebook": "latest"
+    "passport-facebook": "latest",
+    "express-session": "latest"
     }
 }

@@ -1,7 +1,8 @@
 // configure body parser
 var express = require('express'),
 	path = require('path'),
-    bodyParser = require('body-parser');	// pull information from HTML POST (express4)
+    bodyParser = require('body-parser'),	// pull information from HTML POST (express4)
+    session = require("express-session");
 
 
 module.exports = function(passport) {
@@ -25,7 +26,8 @@ module.exports = function(passport) {
     });
     // set default engine to jade for rendering (?) app.set('view engine', 'jade');
         
-	// use passport session
+	// use passport session, express-session enables to access fb serialized-user through entire app 
+    app.use(session({ secret: "ultor_minder" , resave: true, saveUninitialized: true}));
 	app.use(passport.initialize());
 	app.use(passport.session());
     
