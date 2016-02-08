@@ -19,8 +19,8 @@ module.exports = function(passport) {
     //app.use(morgan("dev"));
     app.use(function(req, res, next) {
         res.setHeader('Access-Control-Allow-Origin', '*'); //allowing requests to come from different domains in order to develop a client-independent system and prevent CORS (Cross Origin Request Sharing) in the web browser.
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+        res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,HEAD,DELETE,OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Access-Control-Allow-Origin');
         next();
     });
     // set default engine to jade for rendering (?) app.set('view engine', 'jade');

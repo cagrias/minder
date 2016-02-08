@@ -52,12 +52,33 @@
                 <input type="checkbox" id="rem">
                 <label for="rem">Stay Signed in</label>
                 <button id="submit" type="submit" ripple>Sign in</button>
+
             </div>
+            <div class="form-group">
+                <!--<div class="fb-login-button" data-max-rows="1" data-size="small" data-show-faces="false"-->
+                     <!--data-auto-logout-link="false"></div>-->
+                <a href="/rs/login/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
+
+            </div>
+            <!--<div class="row">-->
+                <!--<div-->
+                        <!--class="fb-like"-->
+                        <!--data-share="true"-->
+                        <!--data-width="450"-->
+                        <!--data-show-faces="true">-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="form-group">-->
+            <!---->
+            <!--</div>-->
+
 
         </form>
+
         <footer><a id="create" href="#0">Create an account</a></footer>
     </div>
-
+    <!--*************************************************************************************-->
     <div class="register" style="display: none">
 
         <form action="" id="sign-up-form">
@@ -69,6 +90,70 @@
                 <label for="username" class="float-label">Email</label>
                 <erroru>
                     Username is required
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24h-24z" fill="none"/>
+                            <path d="M1 21h22l-11-19-11 19zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                        </svg>
+                    </i>
+                </erroru>
+            </div>
+            <div id="rname" class="form-group">
+                <input id="name" spellcheck=false class="form-control" name="username" type="text" size="18"
+                       alt="login" required="">
+                <span class="form-highlight"></span>
+                <span class="form-bar"></span>
+                <label for="username" class="float-label">Name</label>
+                <erroru>
+                    Username is required
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24h-24z" fill="none"/>
+                            <path d="M1 21h22l-11-19-11 19zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                        </svg>
+                    </i>
+                </erroru>
+            </div>
+            <div id="rsurname" class="form-group">
+                <input id="surname" spellcheck=false class="form-control" name="username" type="text" size="18"
+                       alt="login" required="">
+                <span class="form-highlight"></span>
+                <span class="form-bar"></span>
+                <label for="username" class="float-label">Surname</label>
+                <erroru>
+                    Username is required
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24h-24z" fill="none"/>
+                            <path d="M1 21h22l-11-19-11 19zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                        </svg>
+                    </i>
+                </erroru>
+            </div>
+            <div id="rgender" class="form-group">
+                <input id="gender" spellcheck=false class="form-control" name="username" type="text" size="18"
+                       alt="login" required="">
+                <span class="form-highlight"></span>
+                <span class="form-bar"></span>
+                <label for="username" class="float-label">Gender</label>
+                <erroru>
+                    Username is required
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24h-24z" fill="none"/>
+                            <path d="M1 21h22l-11-19-11 19zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                        </svg>
+                    </i>
+                </erroru>
+            </div>
+            <div id="rdob" class="form-group">
+                <input id="dob" spellcheck=false class="form-control" name="username" type="text" size="18"
+                       alt="login" required="">
+                <span class="form-highlight"></span>
+                <span class="form-bar"></span>
+                <label for="username" class="float-label">Date of Birth</label>
+                <erroru>
+                    Date of Birth is required
                     <i>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path d="M0 0h24v24h-24z" fill="none"/>
@@ -102,7 +187,7 @@
 
     <footer class="footer">Copyright © Ultor™</footer>
 </nglogin>
-
+<!--*********************************************************************-->
 <ngmain *ngIf="token != null">
     <nav class="navbar navbar-default">
         <div class="container-fluid">

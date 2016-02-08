@@ -31,7 +31,6 @@ export class RootComponent implements OnInit, AfterViewInit {
     private location: Location;
     private tooltip: any;
     private hasToken:boolean;
-//http://192.168.3.71:8000/#/front/activate/ekin.cam@argela.com.tr/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImVraW4uY2FtQGFyZ2VsYS5jb20udHIiLCJwYXNzd29yZCI6ImNhZ3JpIiwiaWF0IjoxNDU0NjY1MDQ2fQ.9GKdn7dsa3g0V8dn5g79V457ZHoFdNkPokEQFEnE5r0
 
     constructor(router:Router, location:Location) {
 
@@ -44,18 +43,33 @@ export class RootComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
+        var that = this;
         this.urlPath = this.location.path().split('/');
         this.isActivate = this.urlPath[2] == 'activate';
         if(this.isActivate){
-            this.username = this.urlPath[3];
-            this.tokenToCheck = this.urlPath[4];
-            this.hasToken = Activate.userTokenCheck(this.username,this.tokenToCheck, function() {
+            var username = this.urlPath[3];
+            var tokenToCheck = this.urlPath[4];
+            $.ajax({
+                method: 'POST',
+                url: '/rs/login/activate',
+                data: {
+                    'username': username,
+                    'token': tokenToCheck
+                },
+                cache: false,
+                timeout: 5000,
+            }).done(function (res) {
+                    console.log(res.type);
+                    if (res.type) {
+                        that.token = tokenToCheck;
+                    } else {
+                        swal("Wrong credentials!", "Did you sign up?", "error");
+                    }
 
-                if (this.hasToken) {
-                    this.token = this.tokenToCheck;
-                }
-                console.log(this.isActivate, this.username, this.tokenToCheck, this.token);
-            });
+                })
+                .fail(function (xhr, textStatus, errorThrown) {
+                    swal("Oops...", "Something went wrong!", "error");
+                });
         }
 
         //console.log('Root');
@@ -70,19 +84,19 @@ export class RootComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        if(this.hasToken){
-            this.token = this.tokenToCheck;
-        }
-        console.log(this.isActivate,this.username, this.tokenToCheck, this.token );
-
-
-
-        console.log(this.isActivate,this.username, this.tokenToCheck, this.token, this.hasToken );
+        var that = this;
+        //if(this.hasToken){
+        //    this.token = this.tokenToCheck;
+        //}
 
         $('#submit').on('click', this.login.bind(this));
 
         this.indexInit();
 
+        //setTimeout(function(){
+        //    console.log('im setting');
+        //    that.token = that.tokenToCheck;
+        //},3000);
 
     }
 
@@ -116,7 +130,6 @@ export class RootComponent implements OnInit, AfterViewInit {
             });
 
     }
-
 
     indexInit() {
         var that = this;
@@ -197,18 +210,18 @@ export class RootComponent implements OnInit, AfterViewInit {
 
         //Registration and Login form fadeToggles
         $('#create').on('click', function () {
-            loginf.animate({height: '285px', 'margin-top': '125px'}, 600, function () {
+            loginf.animate({height: '555px', 'margin-top': '125px'}, 600, function () {
                 loginf.fadeOut(600, function () {
-                    registerf.css({height: '285px', 'margin-top': '125px'});
+                    registerf.css({height: '555px', 'margin-top': '125px'});
                     registerf.fadeIn(600);
                 });
             });
         });
 
         $('#log-in-f').on('click', function () {
-            registerf.animate({height: '460px', 'margin-top': '40px'}, 600, function () {
+            registerf.animate({height: '490px', 'margin-top': '40px'}, 600, function () {
                 registerf.fadeOut(600, function () {
-                    loginf.css({height: '460px', 'margin-top': '40px'});
+                    loginf.css({height: '490px', 'margin-top': '40px'});
                     loginf.fadeIn(600);
                 });
             });

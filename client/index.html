@@ -25,7 +25,6 @@
     <script src="node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.min.js"></script>
 
     <link rel="stylesheet" href="index.css">
-    <!--<script type="text/javascript" src="index.js"></script>-->
     <!--BOOTSTRAP & JQUERY-->
     <link href="./style.css" rel="stylesheet">
 
@@ -42,62 +41,16 @@
     <!--SWEETALERT-->
     <script type="text/javascript" src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="node_modules/sweetalert/dist/sweetalert.css">
-    <!--<base href="/">-->
-    <!--<script>-->
-        <!--$(document).ready(function () {-->
-            <!--var user, pass;-->
-            <!--$("#submit").click(function () {-->
-                <!--user = $("#username").val();-->
-                <!--pass = $("#password").val();-->
-                <!--$.ajax({-->
-                    <!--method: 'POST',-->
-                    <!--url: '/rs/login/authenticate',-->
-                    <!--data: {-->
-                        <!--'username': user,-->
-                        <!--'password': pass-->
-                    <!--},-->
-                    <!--cache: false,-->
-                    <!--timeout: 5000,-->
-                    <!--beforeSend: function (xhr, settings) {-->
-                    <!--},-->
-                    <!--error: function () {-->
-                    <!--},-->
-                    <!--success: function (data, textStatus, jqXHR) {-->
-                    <!--},-->
-                    <!--complete: function (xhr, textStatus) {-->
-                    <!--}-->
-                <!--}).done(function (res) {-->
-                            <!--console.log(res);-->
 
-                            <!--if (res.type) {-->
-                                <!--swal('Nice!', 'You\'ve successfully logged in', 'success');-->
-                                <!--window.location.replace('/rs/home/main');-->
-                                <!--//window.location.replace('/front/test');-->
-                            <!--} else {-->
-                                <!--swal("Wrong credentials!", "Did you sign up?", "error");-->
-                            <!--}-->
-                        <!--})-->
-                        <!--.fail(function (xhr, textStatus, errorThrown) {-->
-                            <!--console.log("1)" + JSON.stringify(xhr));-->
-                            <!--console.log("2)" + textStatus);-->
-                            <!--console.log("3)" + errorThrown);-->
-                            <!--swal("Oops...", "Something went wrong!", "error");-->
-                        <!--})-->
-                        <!--.always(function () {-->
-                            <!--console.log("complete");-->
-                        <!--});-->
-                <!--return false;-->
-            <!--});-->
-        <!--});-->
-    <!--</script>-->
+    <!--FONT AWESOME-->
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+
 </head>
 <body>
-
 <root-component></root-component>
 <script>
     System.import('RootComponent')
             .then(null, console.error.bind(console));
 </script>
-
 </body>
 </html>

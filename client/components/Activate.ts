@@ -21,7 +21,6 @@ export class Activate {
                 } else {
                     swal("Wrong credentials!", "Did you sign up?", "error");
                 }
-                callback();
                 return res.type;
             })
             .fail(function (xhr, textStatus, errorThrown) {
