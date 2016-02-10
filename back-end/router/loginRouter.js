@@ -122,40 +122,20 @@ module.exports = function(passport) {
    
 	// FACEBOOK ROUTES
 	// route for facebook authentication and login
-	loginRouter.get('/auth/facebook', 
-    function(req, res, next) {
-        console.log("setting the response1")
-        
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Access-Control-Allow-Origin');
-        res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,HEAD,DELETE,OPTIONS');
-        next();
-        }, 
-        passport.authenticate('facebook', { scope : 'email' }));
+	loginRouter.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 	// handle the callback after facebook has authenticated the user
 	loginRouter.get('/auth/facebook/callback', passport.authenticate('facebook', {successRedirect: "/rs/login/me"})); 
     // 
     // { failureRedirect: '/rs/login' }),
-    //     function(req, res) {
-    //         console.log("User details taken from facebook: " + req.user);
-    //         res.setHeader('Access-Control-Allow-Origin', '*');
-    //         res.setHeader('Access-Control-Allow-Headers', 'Content-Type,X-Requested-With');
-    //         res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,HEAD,DELETE,OPTIONS');
-    //         res.json(req.user);           
+    //     function(req, res) {         
     //         // Successful authentication, redirect home.
     //         // res.redirect('/rs/login/me');
     // });
+    
 
 	//expjwt({secret: JWT_SECRET}), 
 	loginRouter.get('/me', function(req, res) {
-        
-        console.log("setting the response2");
-        // 
-        // res.setHeader('Access-Control-Allow-Origin', '*');
-        // res.setHeader('Access-Control-Allow-Headers', 'Content-Type,X-Requested-With');
-        // res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,HEAD,DELETE,OPTIONS');
-        
-		console.log("Me user: " + req.user.gender);
+        console.log("Me user: " + req.user.gender);
         res.json(req.user);
 	});
     
