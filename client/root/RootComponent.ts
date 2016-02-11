@@ -5,6 +5,7 @@ import {Test} from "./../components/Test";
 import {Minder} from "./../components/Minder";
 import {Home} from "../components/Home";
 import {Activate} from "../components/Activate";
+import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
 
 // Root Component
 @Component({
@@ -12,7 +13,7 @@ import {Activate} from "../components/Activate";
 })
 @View({
     templateUrl: '/./root/rootComponent.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES]
 })
 @RouteConfig([
     {path: '/front/activate/:token', component: Activate, name: 'Activate'},

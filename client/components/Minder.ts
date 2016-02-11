@@ -3,6 +3,7 @@
  */
 import {Component, View,EventEmitter, OnInit} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
+import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
 
 @Component({
     selector: 'minder'
@@ -10,7 +11,7 @@ import {RouteParams} from 'angular2/router';
 @View({
     templateUrl: 'pagehtmls/minder.html',
     //styleUrls:['pagehtmls/minder.css'],
-    directives: []
+    directives: [MATERIAL_DIRECTIVES]
 })
 export class Minder implements OnInit {
 

@@ -8,6 +8,7 @@ System.config({
     //map tells the System loader where to look for things
     defaultJSExtensions: true,
     map: {
-        RootComponent: "./root/RootComponent"
+        RootComponent: "./root/RootComponent",
+        "ng2-material": "../node_modules/ng2-material"
     }
 });

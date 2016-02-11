@@ -189,28 +189,17 @@
 </nglogin>
 <!--*********************************************************************-->
 <ngmain *ngIf="token != null">
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <!--<a class="navbar-brand" [routerLink]="['Topology']"><img style="height:20px;width:150px;" alt="Brand" src="../img/brand.jpg"></a>-->
+ 
+    <md-toolbar>
+        <nav>
+            <div class="md-toolbar-tools">
+                <button md-raised-button class="md-primary" [routerLink]="['Test']">Test</button>
+                <button md-raised-button class="md-primary" [routerLink]="['Minder']">Minder</button>
+                <button md-raised-button class="md-primary" [routerLink]="['Home']">Home</button>
+                <span flex></span>
+                <a md-button href="/logout">Logout</a>
             </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a [routerLink]="['Home']">Home</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['Test']">Test</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['Minder']">Minder</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/logout">Logout</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+        </nav>
+    </md-toolbar>
     <router-outlet></router-outlet>
 </ngmain>
