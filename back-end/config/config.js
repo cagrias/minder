@@ -12,7 +12,8 @@ module.exports = {
     },
     
     'localAuth' : {
-        'activateUrl'   : 'http://192.168.3.71:8000/#/front/activate/'
+        'activateUrl'   : 'http://192.168.3.71:8000/#/front/activate/',
+        'jwtSecret'     : 'secret'
         
     }
 };

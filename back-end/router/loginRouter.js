@@ -5,7 +5,7 @@ var express = require('express'),
     nodemailer = require('nodemailer'),
 	configAuth = require('../config/config');
 
-var JWT_SECRET = "secret";
+var JWT_SECRET = configAuth.localAuth.jwtSecret;
 
 module.exports = function(passport) {
 	
