@@ -1,8 +1,9 @@
 var mongoose = require('mongoose'),
-    passport = require('passport');
+    passport = require('passport'),
+	config = require('./back-end/config/config');
 
 // connect to db
-mongoose.connect('mongodb://minder:minder@192.168.3.25:27017/minder');//mongodb://zuzu:test@ds039211.mongolab.com:39211/zuzu_crew_test_db');
+mongoose.connect(config.mongoDB.mongoUrl);
 
 // Bootstrap passport config
 passport = require('./back-end/config/passport')(passport);

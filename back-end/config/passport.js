@@ -4,7 +4,7 @@ var LocalStrategy    = require('passport-local').Strategy,
     FacebookStrategy = require('passport-facebook').Strategy,
 	Account = require('../model/account'),
 	path = require('path'),
-	configAuth = require('./auth');
+	configAuth = require('./config');
 
 module.exports = function(passport) {
 	// Serialize sessions

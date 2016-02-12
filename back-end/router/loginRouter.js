@@ -1,8 +1,9 @@
-var express = require('express');
-var expjwt = require('express-jwt');
-var jwt		= require('jsonwebtoken');
-var Account = require('../model/account.js');
-var nodemailer = require('nodemailer');
+var express = require('express'),
+    expjwt = require('express-jwt'),
+    jwt		= require('jsonwebtoken'),
+    Account = require('../model/account.js'),
+    nodemailer = require('nodemailer'),
+	configAuth = require('../config/config');
 
 var JWT_SECRET = "secret";
 
@@ -12,14 +13,12 @@ module.exports = function(passport) {
 	
 	// middleware to use for all requests
 	loginRouter.get('/', function(req, res) {
-        console.log('Entered LoginRouter Service with url: ' + req.url);
 		res.json({
 					data: "Sign-in or Sign-up!"
 				});
 	});
 
 	loginRouter.post('/authenticate', function(req, res) {
-		console.log("Auth post!");
 		Account.findOne({'username': req.body.username, 'password': req.body.password}, function(err, account) {
 			if (err) {
 				res.json({
@@ -48,7 +47,6 @@ module.exports = function(passport) {
 	});
 	
 	loginRouter.post('/signup', function(req, res) {
-		console.log("Sign-up post with username:" + req.body.username + ", pass:" + req.body.password);
 		Account.findOne({'username': req.body.username, 'password': req.body.password}, function(err, account) {
 			if (err) {
 				res.json({
@@ -91,7 +89,6 @@ module.exports = function(passport) {
 	});
     
 	loginRouter.post('/activate', function(req, res) {
-		console.log("Activate post!");
 		Account.findOne({'username': req.body.username, 'token': req.body.token}, function(err, account) {
 			if (err) {
 				res.json({
@@ -121,9 +118,7 @@ module.exports = function(passport) {
 	});
    
 	// FACEBOOK ROUTES
-	// route for facebook authentication and login
 	loginRouter.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-	// handle the callback after facebook has authenticated the user
 	loginRouter.get('/auth/facebook/callback', passport.authenticate('facebook', {successRedirect: "/rs/login/me"})); 
     // 
     // { failureRedirect: '/rs/login' }),
@@ -145,7 +140,7 @@ module.exports = function(passport) {
 
 function sendEmail(username, token) {
     var transporter = nodemailer.createTransport('smtps://ultor.band%40gmail.com:ultortheband@smtp.gmail.com');
-    var activateUrl = "http://192.168.3.71:8000/#/front/activate/"+ username+ "/" + token;
+    var activateUrl = configAuth.localAuth.activateUrl + username+ "/" + token;
     // setup e-mail data with unicode symbols
     var mailOptions = {
         from: 'Ultor™ <ultor.band@gmail.com>', // sender address
