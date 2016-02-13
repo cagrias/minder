@@ -47,7 +47,8 @@ module.exports = function(passport) {
 	});
 	
 	loginRouter.post('/signup', function(req, res) {
-		Account.findOne({'username': req.body.username, 'password': req.body.password}, function(err, account) {
+		console.log("Sign-up post with username:" + req.body.username + ", userType:" + req.body.userType);
+		Account.findOne({'username': req.body.username}, function(err, account) {
 			if (err) {
 				res.json({
 					type: false,
@@ -65,22 +66,28 @@ module.exports = function(passport) {
 						data: "Void info!"
 					});
                 }
-                else {                 
+                else {
+                    console.log(req.body);                 
 					var accModel = new Account();
 					accModel.username = req.body.username;
 					accModel.password = req.body.password;
                     accModel.name     = req.body.name;
                     accModel.gender   = req.body.gender;
-                    accModel.userType = "local";
-                    accModel.isActive = false;
-                    accModel.token    = jwt.sign({"username": req.body.username, "password": req.body.password}, JWT_SECRET);
-                    sendEmail(req.body.username, accModel.token);  
+                    accModel.userType = req.body.userType;
+                    if(accModel.userType == "local") {
+                        accModel.token    = jwt.sign({"username": req.body.username, "password": req.body.password}, JWT_SECRET);
+                        sendEmail(req.body.username, accModel.token);
+                        accModel.isActive = false;
+                    } else {
+                        accModel.facebook_id = req.body.facebook_id;
+                        accModel.token = req.body.token;
+                        accModel.isActive = true;
+                    }
 					accModel.save(function(err, account) {
 						console.log(account.token);
 						res.json({
                             type: true,
                             data: account
-                            // token: account.token
                         });
 					})
 				}

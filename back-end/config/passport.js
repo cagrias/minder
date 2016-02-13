@@ -34,16 +34,8 @@ module.exports = function(passport) {
 
         // asynchronous
         process.nextTick(function() {
-
-            for(var propertyName in profile) {
-                 console.log(propertyName + " " + profile[propertyName]);
-            }
-            for(var propertyName in profile.name) {
-                 console.log(propertyName + " " + profile.name[propertyName]);
-            }
-
-            // find the user in the database based on their facebook id
-            Account.findOne({ 'facebook_id' : profile.id }, function(err, user) {
+            // find the user in the database based on their facebook id OR EMAIL??
+            Account.findOne({ 'username' : profile.emails[0].value }, function(err, user) {
 
                 // if there is an error, stop everything and return that
                 // ie an error connecting to the database
@@ -63,7 +55,7 @@ module.exports = function(passport) {
                     newUser.name           = profile.name.givenName + ' ' + profile.name.familyName; // look at the passport user profile to see how names are returned
                     newUser.username       = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
                     newUser.isActive       = true;
-                    newUser.userType       = 'fb';
+                    newUser.userType       = 'facebook';
                     newUser.gender         = profile.gender;
 
                     // save our user to the database

@@ -7,7 +7,7 @@ module.exports = {
     },
     
     'mongoDB' : {
-        'mongoUrl'      : 'mongodb://minder:minder@192.168.3.17:27017/minder' // mongodb://zuzu:test@ds039211.mongolab.com:39211/zuzu_crew_test_db'
+        'mongoUrl'      : 'mongodb://zuzu:test@ds039211.mongolab.com:39211/zuzu_crew_test_db'//'mongodb://minder:minder@192.168.3.17:27017/minder' // 
         
     },
     
