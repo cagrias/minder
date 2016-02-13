@@ -56,10 +56,16 @@ module.exports = function(passport) {
 				});
 			} else {
 				if (account) {
-					res.json({
-						type: false,
-						data: "User already exists!"
-					});
+                    if(account.userType == "facebook") // facebook users use signup & login functions both from here
+                        res.json({
+                            type: true,
+                            data: account
+                        });
+                    else 
+                        res.json({
+                            type: false,
+                            data: "User already exists!"
+                        });
 				} else if(!req.body.username || !req.body.username) {
                     res.json({
 						type: false,
@@ -74,7 +80,7 @@ module.exports = function(passport) {
                     accModel.name     = req.body.name;
                     accModel.gender   = req.body.gender;
                     accModel.userType = req.body.userType;
-                    if(accModel.userType == "local") {
+                    if(accModel.userType != "facebook") {
                         accModel.token    = jwt.sign({"username": req.body.username, "password": req.body.password}, JWT_SECRET);
                         sendEmail(req.body.username, accModel.token);
                         accModel.isActive = false;
