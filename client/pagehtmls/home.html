@@ -2,9 +2,113 @@
     <div class="row">
         <div style='background:#3f51b5' class='leftmenu col-xs-2 full-height'>
             <a href="/#/front/home"><img class='solidborder' src="img/profile.jpg" alt="Profile" style='width:90%;margin-left:4%;'></a>
-            
+
         </div>
-        <div style='background:white' class='content col-xs-9 full-height'></div>
+        <div style='background:white' class='content col-xs-9 full-height'>
+
+
+
+
+
+            <section class="md-whiteframe-z2" style='margin-top:5%;'>
+
+                <md-content class="md-padding" layout="row" layout-align="center start" layout-wrap="">
+                    <div flex="50" layout="column">
+
+                        <md-card>
+                            <md-card-title>
+
+                                <md-card-title-text>
+                                    <span class="md-headline">Gadgets</span>
+                                    <span class="md-subhead">Connecting and finding out about your Gadgets</span>
+
+                                </md-card-title-text>
+
+                            </md-card-title>
+                            <md-card-actions layout="row" layout-align="end center">
+                                <button md-button><span class="md-button-wrapper"><a href="/topology">Try Now!</a></span></button>
+                            </md-card-actions>
+                        </md-card>
+
+
+
+                    </div>
+
+                    <div flex="50" layout="column">
+
+                        <md-card>
+
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <span class="md-headline">Add a new Gadget</span>
+                                </md-card-title-text>
+                            </md-card-title>
+                            <md-card-content>
+                                <p>
+                                    Choose gadgets..
+                                </p>
+                            </md-card-content>
+
+                            <form [ngFormModel]="projectForm">
+
+                                <md-input-container class="md-block">
+                                    <label for="description">Description</label>
+                                    <input md-input ngControl="description" id="description" [(value)]="model.description">
+                                    <div md-messages="description">
+                                        <div md-message="required">This is required.</div>
+                                        <div md-message="maxlength">The name has to be less than 30 characters long.</div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container class="md-block">
+                                    <label for="clientName">Client Name</label>
+                                    <input md-input ngControl="clientName" id="clientName" [(value)]="model.clientName">
+                                    <div md-messages="clientName" role="alert">
+                                        <div md-message="required">This is required.</div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container class="md-block">
+                                    <label for="clientEmail">Client Email</label>
+                                    <input md-input type="email" ngControl="clientEmail" id="clientEmail" [(value)]="model.clientEmail" />
+                                    <div md-messages="clientEmail" role="alert">
+                                        <div md-message>Your email must be between 10 and 100 characters long and look like an e-mail address.</div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container class="md-block">
+                                    <label for="rate">Hourly Rate (USD)</label>
+                                    <input md-input type="number" step="any" ngControl="rate" id="rate" [(value)]="model.rate" #rateInput/>
+                                    <div md-messages="rate" role="alert">
+                                        <div md-message="mdNumberRequired">
+                                            You've got to charge something! You can't just <b>give away</b> a Missile Defense
+                                            System.
+                                        </div>
+                                        <div md-message="mdMin">
+                                            You should charge at least $800 an hour. This job is a big deal... if you mess up, everyone dies!
+                                        </div>
+                                        <div md-message="mdPattern">
+                                            You should charge exactly $1,234.
+                                        </div>
+                                        <div md-message="mdMax">
+                                            ${{rateInput.value}} an hour? That's a little ridiculous. I doubt event Bill Clinton could afford that.
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </form>
+                        </md-card>
+
+
+
+                    </div>
+                </md-content>
+
+            </section>
+
+
+
+
+        </div>
         <div style='background:black' class='rightbar col-xs-1 full-height'></div>
     </div>
 </div>
